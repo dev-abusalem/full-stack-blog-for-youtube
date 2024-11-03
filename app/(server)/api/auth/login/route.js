@@ -3,11 +3,7 @@ import User from "@/app/(server)/models/user";
 import { generateAuthToken } from "@/app/(server)/token/generateAuthToken";
 import { NextResponse } from "next/server";
 // Disable the default body parser
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+
 export async function POST(request) {
   try {
     // Connect to the database

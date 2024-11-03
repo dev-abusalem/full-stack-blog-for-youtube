@@ -2,11 +2,7 @@ import { dbConnect } from "@/app/(server)/libs/mongoose";
 import User from "@/app/(server)/models/user";
 import { NextResponse } from "next/server";
 // Disable the default body parser
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+
 export async function POST(request) {
   try {
     // Connect to the database

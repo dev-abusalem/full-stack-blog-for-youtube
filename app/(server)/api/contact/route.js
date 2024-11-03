@@ -4,11 +4,7 @@ import { sendEmail } from "../../utils/sendEmail";
 import { contactTemplate } from "../../utils/contactTemplate";
 import { NextResponse } from "next/server";
 // Disable the default body parser
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+
 export async function POST(request) {
   try {
     // Connect to the database

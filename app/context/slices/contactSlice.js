@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/app/utils/base-url";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -5,7 +6,7 @@ import axios from "axios";
 export const fetchcontact = createAsyncThunk(
   "contact/fetchcontact",
   async () => {
-    const response = await axios.get(`http://localhost:3000/api/contact`);
+    const response = await axios.get(`${BASE_URL}/api/contact`);
     return response.data?.contacts;
   }
 );

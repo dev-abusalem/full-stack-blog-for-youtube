@@ -51,6 +51,7 @@ import { useRouter } from "next/navigation";
 import { fetchPosts } from "@/app/context/slices/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Loadar from "@/app/global/Loadar";
+import Link from "next/link";
 function ManagePostMain() {
   const data = useSelector((state) => state.posts.data) || [];
   const postStatus = useSelector((state) => state.posts.status);
@@ -75,7 +76,7 @@ function ManagePostMain() {
         );
       },
       cell: ({ row }) => (
-        <div className="lowercase">{row.getValue("title")}</div>
+        <div className=" capitalize">{row.getValue("title")}</div>
       ),
     },
     {
@@ -101,7 +102,9 @@ function ManagePostMain() {
     },
     {
       accessorKey: "tags",
-      header: () => <h2 className="text-lg font-semibold text-black">Tags</h2>,
+      header: () => (
+        <h2 className="text-lg text-center font-semibold text-black">Tags</h2>
+      ),
       cell: ({ row }) => {
         const tags = row?.original?.tags;
         return (
@@ -125,18 +128,19 @@ function ManagePostMain() {
       ),
       cell: ({ row }) => {
         return (
-          <div>
-            <div className="flex justify-end items-center gap-x-2">
-              <Eye
-                onClick={() => router.push(`/blogs/${row?.original?._id}`)}
-                className="text-green-500 cursor-pointer"
-              />
+          <div className="flex justify-end items-center gap-x-2">
+            <Eye
+              target="_blank"
+              onClick={() => router.push(`/blogs/${row?.original?._id}`)}
+              className="text-green-500 cursor-pointer"
+            />
+            <Link href={`/dashboard/posts/edit-post/${row?.original?._id}`}>
               <PencilLine className="text-blue-500 cursor-pointer" />
-              <Trash2
-                onClick={() => handleDelete(row?.original?._id)}
-                className="text-red-500 cursor-pointer"
-              />
-            </div>
+            </Link>
+            <Trash2
+              onClick={() => handleDelete(row?.original?._id)}
+              className="text-red-500 cursor-pointer"
+            />
           </div>
         );
       },

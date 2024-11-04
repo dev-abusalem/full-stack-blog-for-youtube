@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,7 +32,7 @@ import { removeImage } from "@/app/services/ImageRemove";
 import { ImageUpage } from "@/app/services/uploadImage";
 import RemoveAndPreviewImage from "./RemoveAndPreviewImage";
 import NewPostByAI from "./NewPostByAI";
-const categories = ["Technology", "Design", "Business", "Lifestyle", "Health"];
+import { BASE_URL } from "@/app/utils/base-url";
 
 function NewPostManual({ setIsUseAi }) {
   const {
@@ -44,14 +44,27 @@ function NewPostManual({ setIsUseAi }) {
     formState: { errors },
   } = useForm();
   const [tags, setTags] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [currentTag, setCurrentTag] = useState("");
   const [uploadImages, setUploadImages] = useState("");
   const [uploadImageKey, setUploadImageKey] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await axios.get(`${BASE_URL}/api/posts/category`);
+        setCategories(res.data.categories);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchCategories();
+  }, []);
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const result = await axios.post("/api/posts/new-post", {
+      const result = await axios.post(`${BASE_URL}/api/posts/new-post`, {
         ...data,
         tags: JSON.stringify(tags),
         image: uploadImages,
@@ -166,8 +179,8 @@ function NewPostManual({ setIsUseAi }) {
                         </SelectTrigger>
                         <SelectContent>
                           {categories.map((category) => (
-                            <SelectItem key={category} value={category}>
-                              {category}
+                            <SelectItem key={category._id} value={category._id}>
+                              {category.name}
                             </SelectItem>
                           ))}
                         </SelectContent>

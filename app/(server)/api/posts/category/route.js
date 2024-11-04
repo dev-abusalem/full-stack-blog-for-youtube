@@ -1,5 +1,5 @@
 import { dbConnect } from "../../../libs/mongoose";
-import Category from "../../../models/category";
+import PostCategory from "../../../models/category";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
@@ -8,7 +8,7 @@ export async function POST(request) {
     await dbConnect();
     const { name, status } = await request.json();
     // Create a new Category document
-    const newCategory = new Category({
+    const newCategory = new PostCategory({
       name,
       status,
     });
@@ -36,10 +36,7 @@ export async function GET(request) {
     // Connect to the database
     await dbConnect();
 
-    // Create a new Category document
-    const categories = await Category.find();
-    // Save the Category to the database
-
+    const categories = await PostCategory.find({ status: "active" });
     return NextResponse.json({
       categories: categories,
     });

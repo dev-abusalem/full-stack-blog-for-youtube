@@ -4,6 +4,7 @@ import Conatiner from "../../global/Conatiner";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { BASE_URL } from "@/app/utils/base-url";
 
 const JoinMainList = () => {
   const [loading, setLoading] = useState(false);
@@ -13,7 +14,7 @@ const JoinMainList = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.post("/api/newsletter", {
+      const res = await axios.post(`${BASE_URL}/api/newsletter`, {
         email: email,
       });
       toast.success(

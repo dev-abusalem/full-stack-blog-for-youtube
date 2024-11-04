@@ -34,6 +34,7 @@ import { useSelector } from "react-redux";
 import Loadar from "@/app/global/Loadar";
 import { useEffect } from "react";
 import ReplyEmail from "@/app/global/ReplyEmail";
+import { BASE_URL } from "@/app/utils/base-url";
 function NewsletterMain() {
   const [data, setData] = React.useState([]);
   const newsletters = useSelector((state) => state.newsletters.data) || [];
@@ -129,7 +130,9 @@ function NewsletterMain() {
   // delete post
   const handleDelete = async (id) => {
     try {
-      const result = await axios.delete(`/api/newsletter`, { data: { id } });
+      const result = await axios.delete(`${BASE_URL}/api/newsletter`, {
+        data: { id },
+      });
       toast.success("Delete newsletter successfully");
       if (result) {
         setTimeout(() => {

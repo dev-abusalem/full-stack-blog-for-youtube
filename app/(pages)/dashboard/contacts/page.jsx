@@ -54,6 +54,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loadar from "@/app/global/Loadar";
 import { useEffect } from "react";
 import ReplyEmail from "@/app/global/ReplyEmail";
+import { BASE_URL } from "@/app/utils/base-url";
 function Page() {
   const [data, setData] = React.useState([]);
   const contacts = useSelector((state) => state.contacts.data) || [];
@@ -189,7 +190,7 @@ function Page() {
   const handleDelete = async (id) => {
     // Add logic for deleting the post here
     try {
-      const result = await axios.delete(`/api/posts/${id}`);
+      const result = await axios.delete(`${BASE_URL}/api/posts/${id}`);
       toast.success("Delete post successfully");
       if (result) {
         setTimeout(() => {

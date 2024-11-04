@@ -1,10 +1,11 @@
+import { BASE_URL } from "@/app/utils/base-url";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Async thunk for fetching newsletters data
 export const fetchnewsletters = createAsyncThunk(
   "newsletters/fetchnewsletters",
   async () => {
-    const response = await fetch(`http://localhost:3000/api/newsletter`);
+    const response = await fetch(`${BASE_URL}/api/newsletter`);
     if (!response.ok) {
       throw new Error("Failed to fetch newsletters");
     }

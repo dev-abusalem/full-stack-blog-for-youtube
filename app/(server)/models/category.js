@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const CategorySchema = new mongoose.Schema(
+const PostCategorySchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -16,5 +16,5 @@ const CategorySchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.CategorySchema ||
-  mongoose.model("Category", CategorySchema);
+export default mongoose.models.PostCategory ||
+  mongoose.model("PostCategory", PostCategorySchema);

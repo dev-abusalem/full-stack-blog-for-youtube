@@ -1,8 +1,9 @@
+import { BASE_URL } from "@/app/utils/base-url";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Async thunk for fetching posts data
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
-  const response = await fetch(`http://localhost:3000/api/posts`);
+  const response = await fetch(`${BASE_URL}/api/posts`);
   if (!response.ok) {
     throw new Error("Failed to fetch posts");
   }
